@@ -1,0 +1,16 @@
+C:\Users\lylly\Desktop\workspace\anima-channel\bin\Debug\net5.0\anima-channel.exe
+C:\Users\lylly\Desktop\workspace\anima-channel\bin\Debug\net5.0\anima-channel.deps.json
+C:\Users\lylly\Desktop\workspace\anima-channel\bin\Debug\net5.0\anima-channel.runtimeconfig.json
+C:\Users\lylly\Desktop\workspace\anima-channel\bin\Debug\net5.0\anima-channel.runtimeconfig.dev.json
+C:\Users\lylly\Desktop\workspace\anima-channel\bin\Debug\net5.0\anima-channel.dll
+C:\Users\lylly\Desktop\workspace\anima-channel\bin\Debug\net5.0\ref\anima-channel.dll
+C:\Users\lylly\Desktop\workspace\anima-channel\bin\Debug\net5.0\anima-channel.pdb
+C:\Users\lylly\Desktop\workspace\anima-channel\obj\Debug\net5.0\anima-channel.csprojAssemblyReference.cache
+C:\Users\lylly\Desktop\workspace\anima-channel\obj\Debug\net5.0\anima-channel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lylly\Desktop\workspace\anima-channel\obj\Debug\net5.0\anima-channel.AssemblyInfoInputs.cache
+C:\Users\lylly\Desktop\workspace\anima-channel\obj\Debug\net5.0\anima-channel.AssemblyInfo.cs
+C:\Users\lylly\Desktop\workspace\anima-channel\obj\Debug\net5.0\anima-channel.csproj.CoreCompileInputs.cache
+C:\Users\lylly\Desktop\workspace\anima-channel\obj\Debug\net5.0\anima-channel.dll
+C:\Users\lylly\Desktop\workspace\anima-channel\obj\Debug\net5.0\ref\anima-channel.dll
+C:\Users\lylly\Desktop\workspace\anima-channel\obj\Debug\net5.0\anima-channel.pdb
+C:\Users\lylly\Desktop\workspace\anima-channel\obj\Debug\net5.0\anima-channel.genruntimeconfig.cache
