@@ -1,6 +1,8 @@
 <h1 align="center">Anima Channel</h1>
 <h3 align="center"><img src="https://i.imgur.com/RoZuVjw.png"/></h3>
+
 ---
+
 ## Índice
 - [Sobre](#-sobre)
 - [Tecnologia Utilizada](#-tecnologia-utilizada)
