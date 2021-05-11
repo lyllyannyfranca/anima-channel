@@ -4,9 +4,11 @@ namespace anima_channel
 {
     class Program
     {
-        static SerieRepositorio repositorio = new SerieRepositorio();
+        static Menu menu = new Menu();
+
         static void Main(string[] args)
         {
+
             string opcaoUsuario = ObterOpcaoUsuario();
 
             while (opcaoUsuario.ToUpper() != "X")
@@ -16,29 +18,33 @@ namespace anima_channel
                     switch (opcaoUsuario)
                     {
                         case "1":
-                            ListarSerie();
+                            Listar();
                             break;
                         case "2":
-                            InserirSerie();
+                            Inserir();
                             break;
                         case "3":
-                            AtualizarSerie();
+                            Atualizar();
                             break;
                         case "4":
-                            ExcluirSerie();
+                            Excluir();
                             break;
                         case "5":
-                            VisualizarSerie();
+                            Visualizar();
                             break;
                         case "C":
                             Console.Clear();
                             break;
 
                         default:
-                            throw new ArgumentOutOfRangeException("opcaoUsuario", String.Format("{0} é uma opção inválida!", opcaoUsuario));
+                            throw new ArgumentOutOfRangeException(nameof(opcaoUsuario), String.Format("{0} é uma opção inválida!", opcaoUsuario));
                     }
                 }
                 catch(ArgumentOutOfRangeException e)
+                {
+                    Console.WriteLine(e.Message + Environment.NewLine);
+                }
+                catch (ArgumentException e)
                 {
                     Console.WriteLine(e.Message + Environment.NewLine);
                 }
@@ -46,21 +52,23 @@ namespace anima_channel
                 opcaoUsuario = ObterOpcaoUsuario();
             }
 
-            Console.WriteLine("Obrigado por utilizar nossos serviços.");
-            Console.ReadLine();
+            Console.WriteLine("Obrigada por utilizar o Anima Channel!");
+            Console.WriteLine("Até breve! :D");
         }
 
         private static string ObterOpcaoUsuario()
         {
+            menu.DesenharLogo();
+
             Console.WriteLine();
-            Console.WriteLine("DIO Séries ao seu dispor!");
+            Console.WriteLine("Anima Channel - O canal onde a animação é sem limites!" + Environment.NewLine);
             Console.WriteLine("Informe a opção desejada: ");
 
-            Console.WriteLine("1 - Listar séries");
-            Console.WriteLine("2 - Inserir nova série");
-            Console.WriteLine("3 - Atualizar série");
-            Console.WriteLine("4 - Excluir série");
-            Console.WriteLine("5 - Visualizar série");
+            Console.WriteLine("1 - Listar atrações disponíveis");
+            Console.WriteLine("2 - Inserir nova atração");
+            Console.WriteLine("3 - Atualizar uma atração");
+            Console.WriteLine("4 - Excluir uma atração");
+            Console.WriteLine("5 - Visualizar atrações");
             Console.WriteLine("C - Limpar Tela");
             Console.WriteLine("X - Sair");
             Console.WriteLine();
@@ -70,107 +78,118 @@ namespace anima_channel
             return opcaoUsuario;
         }
 
-        private static void ListarSerie()
+        private static void Listar()
         {
-            Console.WriteLine("Listar séries");
+            Console.WriteLine("Listar atrações disponíveis");
 
-            var lista = repositorio.Listar();
+            Console.Write("Deseja visualizar filmes ou séries disponíveis?" + Environment.NewLine + "Digite F - Filmes / S - Séries: ");
+            string entradaEscolha = Console.ReadLine().ToUpper();
 
-            if (lista.Count == 0)
+            Console.WriteLine();
+
+            switch(entradaEscolha)
             {
-                Console.WriteLine("Nenhuma série cadastrada.");
-                return;
+                case "F":
+                    menu.ListarFilme();
+                    break;
+                case "S":
+                    menu.ListarSerie();
+                    break;
+
+                default:
+                    throw new ArgumentException("É necessário digitar F ou S para selecionar um Filme ou uma Série!");
             }
 
-            foreach (var serie in lista)
-                {
-                var excluido = serie.retornaExcluido();
-                    Console.WriteLine("#ID - {0}: - {1} - {2}", serie.retornaId(), serie.retornaTitulo(), (excluido ? "*Excluído" : ""));
-                }
         }
 
-        private static void InserirSerie()
+        private static void Inserir()
         {
-            Console.WriteLine("Inserir nova série");
+            Console.WriteLine("Inserir nova atração");
 
-            foreach(int i in Enum.GetValues(typeof(Genero)))
+            Console.Write("Que tipo de atração gostaria de inserir?" + Environment.NewLine + "Digite F - Filme / S - Série: ");
+            string entradaResposta = Console.ReadLine().ToUpper();
+
+            switch(entradaResposta)
             {
-                Console.WriteLine("{0} - {1}", i, Enum.GetName(typeof(Genero), i));
+                case "F":
+                    menu.InserirFilme();
+                    Console.WriteLine("Filme inserido com sucesso!");
+                    break;
+                case "S":
+                    menu.InserirSerie();
+                    Console.WriteLine("Série inserida com sucesso!");
+                    break;
+
+                default:
+                    throw new ArgumentException("É necessário digitar F ou S para selecionar um Filme ou uma Série!");
             }
 
-            Console.Write("Digite o gênero entre as opções acima: ");
-            int entradaGenero = int.Parse(Console.ReadLine());
-
-            Console.Write("Digite o Título da Série: ");
-            string entradaTitulo = Console.ReadLine();
-
-            Console.Write("Digite o Ano de Início da Série: ");
-            int entradaAno = int.Parse(Console.ReadLine());
-
-            Console.Write("Digite a Descrição da Série: ");
-            string entradaDescricao = Console.ReadLine();
-
-            Serie novaSerie = new Serie(id: repositorio.ProximoId(),
-                                        genero: (Genero)entradaGenero,
-                                        titulo: entradaTitulo,
-                                        ano: entradaAno,
-                                        descricao: entradaDescricao);
-            
-            repositorio.Inserir(novaSerie);
-
         }
 
-        private static void AtualizarSerie()
+        private static void Atualizar()
         {
-            Console.WriteLine("Atualizar Serie.");
+            Console.WriteLine("Atualizar uma atração");
 
-            Console.Write("Digite o id da série: ");
-            int indiceSerie = int.Parse(Console.ReadLine());
+            Console.Write("Que tipo de atração gostaria de atualizar?" + Environment.NewLine + "Digite F - Filme / S - Série: ");
+            string entradaResposta = Console.ReadLine().ToUpper();
 
-            foreach (int i in Enum.GetValues(typeof(Genero)))
+            switch(entradaResposta)
             {
-                Console.WriteLine("{0} - {1}", i, Enum.GetName(typeof(Genero), i));
+                case "F":
+                    menu.AtualizarFilme();
+                    Console.WriteLine("Dados do filme atualizados com sucesso!");
+                    break;
+                case "S":
+                    menu.AtualizarSerie();
+                    Console.WriteLine("Dados da série atualizados com sucesso!");
+                    break;
+
+                default:
+                    throw new ArgumentException("É necessário digitar F ou S para selecionar um Filme ou uma Série!");
             }
 
-            Console.Write("Digite o gênero entre as opções acima: ");
-            int entradaGenero = int.Parse(Console.ReadLine());
-
-            Console.Write("Digite o Título da Série: ");
-            string entradaTitulo = Console.ReadLine();
-
-            Console.Write("Digite o Ano de Início da Série: ");
-            int entradaAno = int.Parse(Console.ReadLine());
-
-            Console.Write("Digite a Descrição da Série: ");
-            string entradaDescricao = Console.ReadLine();
-
-            Serie atualizarSerie = new Serie(id: indiceSerie,
-                                             genero: (Genero)entradaGenero,
-                                             titulo: entradaTitulo,
-                                             ano: entradaAno,
-                                             descricao: entradaDescricao);
-
-            repositorio.Atualizar(indiceSerie, atualizarSerie);
         }
 
-        private static void ExcluirSerie()
+        private static void Excluir()
         {
-            Console.WriteLine("Excluir Série");
+            Console.WriteLine("Excluir uma atração");
 
-            Console.Write("Digite o id da série: ");
-            int indiceSerie = int.Parse(Console.ReadLine());
+            Console.WriteLine("Que tipo de atração deseja excluir?" + Environment.NewLine + "Digite F - Filme / S - Série: ");
+            string entradaResposta = Console.ReadLine().ToUpper();
 
-            repositorio.Excluir(indiceSerie);
+            switch(entradaResposta)
+            {
+                case "F":
+                    menu.ExcluirFilme();
+                    break;
+                case "S":
+                    menu.ExcluirSerie();
+                    break;
+
+                default:
+                    throw new ArgumentException("É necessário digitar F ou S para selecionar um Filme ou uma Série!");
+            }
+
         }
 
-        private static void VisualizarSerie()
+        private static void Visualizar()
         {
-            Console.Write("Digite o id da série: ");
-            int indiceSerie = int.Parse(Console.ReadLine());
+            Console.WriteLine("Deseja visualizar Filmes ou Séries?" + Environment.NewLine + "Digite F - Filmes / S - Séries: ");
+            string entradaResposta = Console.ReadLine().ToUpper();
 
-            var serie = repositorio.RetornarPorId(indiceSerie);
+            switch(entradaResposta)
+            {
+                case "F":
+                    menu.VisualizarFilme();
+                    break;
+                case "S":
+                    menu.VisualizarSerie();
+                    break;
 
-            Console.WriteLine(serie);
+                default:
+                    throw new ArgumentException("É necessário digitar F ou S para selecionar um Filme ou uma Série!");
+            }
+
         }
     }
 }
